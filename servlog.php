@@ -20,20 +20,21 @@ if(!isset($_SESSION['UserData']['Username'])){
       <body onLoad="moveWin();">
 <script>
   
-setInterval(function(){
+function refresh(){
   let xhr = new XMLHttpRequest();
 
-xhr.open('GET', 'log.php');
+  xhr.open('GET', 'log.php');
 
-xhr.responseType = 'text';
+  xhr.responseType = 'text';
 
-xhr.send();
-xhr.onload = function() {
-  let responseObj = xhr.responseText;
-  document.getElementById("pger").innerHTML = responseObj;
-};
+  xhr.send();
+  xhr.onload = function() {
+    let responseObj = xhr.responseText;
+    document.getElementById("pger").innerHTML = responseObj;
+  };
 
-}, 100);
+  setTimeout(refresh, 1000);
+}();
 </script>
 <?php // echo str_replace("\n","<br>", shell_exec("docker logs "."mc")); ?>
 </p>
