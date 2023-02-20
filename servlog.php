@@ -30,12 +30,13 @@ if (!isset($_SESSION['UserData']['Username'])) {
       window.scroll(0, 1000000000);
     }
 
+    var socket;
     function connect() {
       outputMsg("# Connecting..");
 
       // Create WebSocket connection.
       const protocol = (location.protocol === 'https:' ? 'wss://' : "ws://");
-      const socket = new WebSocket(protocol + document.location.host + ":8080");
+      socket = new WebSocket(protocol + document.location.host + ":8080");
 
       // Connection opened
       socket.addEventListener('open', (event) => {
