@@ -25,7 +25,6 @@ class MyWebSocket implements MessageComponentInterface
         if ($this->authenticateClient($conn)) {
             $this->clients->attach($conn);
             echo "[{$conn->resourceId}] Authenticated!\n";
-            $conn->send("Authenticated!");
 
             // Open a process to run the shell command
             $conn->process = new React\ChildProcess\Process('docker logs -f --tail=100 mc');
@@ -42,6 +41,7 @@ class MyWebSocket implements MessageComponentInterface
             });
 
         } else {
+            $conn->send("Unauthenticated!");
             $conn->close();
         }
     }
