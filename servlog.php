@@ -26,17 +26,12 @@ function refresh(){
 
   xhr.responseType = 'text';
 
-  let timeStart = new Date();
-
   xhr.send();
   xhr.onload = function() {
-    let timeDiff = new Date() - timeStart;
-
     let responseObj = xhr.responseText;
     document.getElementById("pger").innerHTML = responseObj;
 
-    let nexTimeout = Math.min(timeDiff+1000, 5*1000)
-    setTimeout(refresh, nexTimeout);
+    setTimeout(refresh, 1000);
   };
 };
 refresh();
