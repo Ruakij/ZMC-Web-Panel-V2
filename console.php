@@ -114,6 +114,7 @@ if(!isset($_SESSION['UserData']['Username'])){
                     e.preventDefault();
                   });
                 </script>
+                  <form action="man.php" method="get" target="hid1">
                     <input type="submit" value="Start">
                     <input type="hidden" name="ad_id" value="2">        
                     <input type="hidden" name="start" value="2">            
