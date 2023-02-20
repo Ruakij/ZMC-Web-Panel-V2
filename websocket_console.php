@@ -70,7 +70,8 @@ $server = IoServer::factory(
             new MyWebSocket()
         )
     ),
-    8080
+    8080,
+    '[::]'
 );
 
 $server->run();
