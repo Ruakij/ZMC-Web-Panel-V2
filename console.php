@@ -101,17 +101,17 @@ if(!isset($_SESSION['UserData']['Username'])){
                   const cmdElm = document.getElementById("command");
                   const consoleIframeWin = document.getElementById("theconsoleitselflol").contentWindow;
 
-                  cmdFormElm.addEventListener("submit", () => {
+                  cmdFormElm.addEventListener("submit", (e) => {
                     // Get cmd
                     const cmd = cmdElm.value.trim();
 
                     if (cmd !== "") {
                       // Send command
-                      consoleIframeWin.sendCommand(cmdElm.value);
+                      consoleIframeWin.sendCommand(cmd);
                     }
 
                     // Stop propagation
-                    return false;
+                    e.preventDefault();
                   });
                 </script>
                     <input type="submit" value="Start">
