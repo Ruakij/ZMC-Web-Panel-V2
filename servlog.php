@@ -34,7 +34,8 @@ function refresh(){
   };
 
   setTimeout(refresh, 1000);
-}();
+};
+refresh();
 </script>
 <?php // echo str_replace("\n","<br>", shell_exec("docker logs "."mc")); ?>
 </p>
