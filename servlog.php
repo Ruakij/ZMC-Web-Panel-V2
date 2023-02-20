@@ -30,9 +30,9 @@ function refresh(){
   xhr.onload = function() {
     let responseObj = xhr.responseText;
     document.getElementById("pger").innerHTML = responseObj;
-  };
 
-  setTimeout(refresh, 1000);
+    setTimeout(refresh, 1000);
+  };
 };
 refresh();
 </script>
