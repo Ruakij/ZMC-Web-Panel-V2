@@ -7,6 +7,8 @@ use Ratchet\ConnectionInterface;
 use Ratchet\Server\IoServer;
 use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler;
+use Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage;
 
 class MyWebSocket implements MessageComponentInterface {
     protected $clients;
@@ -64,11 +66,15 @@ class MyWebSocket implements MessageComponentInterface {
     }
 }
 
+// Session storage
+$handler = new Handler\NativeFileSessionHandler();
+$storage = new NativeSessionStorage(array(), $handler);
+
 // Run the WebSocket server
 $server = IoServer::factory(
     new HttpServer(
         new WsServer(
-            new MyWebSocket()
+            new SessionProvider(new MyWebSocket(), $storage)
         )
     ),
     8080,
