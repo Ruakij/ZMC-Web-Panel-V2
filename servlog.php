@@ -61,7 +61,7 @@ if (!isset($_SESSION['UserData']['Username'])) {
     }
     connect();
 
-    sendCommand(cmd){
+    function sendCommand(cmd) {
       socket.send(cmd);
     }
 
