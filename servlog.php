@@ -17,7 +17,7 @@ if (!isset($_SESSION['UserData']['Username'])) {
 
 <body>
   <p style="color:white; font-family: 'Roboto Mono', monospace;" id="pger">
-    # Connecting...
+    # Connecting...<br>
   </p>
 
   <script type="text/javascript">
@@ -47,7 +47,7 @@ if (!isset($_SESSION['UserData']['Username'])) {
 
     // Listen for messages
     socket.addEventListener('message', (event) => {
-      outputMsg(event.data.replace("\n", "<br>"));
+      outputMsg(event.data.replaceAll("\n", "<br>"));
     });
 
   </script>
