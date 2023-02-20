@@ -17,7 +17,6 @@ if (!isset($_SESSION['UserData']['Username'])) {
 
 <body>
   <p style="color:white; font-family: 'Roboto Mono', monospace;" id="pger">
-    # Connecting...<br>
   </p>
 
   <script type="text/javascript">
@@ -31,24 +30,35 @@ if (!isset($_SESSION['UserData']['Username'])) {
       window.scroll(0, 1000000000);
     }
 
-    // Create WebSocket connection.
-    const protocol = (location.protocol === 'https:' ? 'wss://' : "ws://");
-    const socket = new WebSocket(protocol + document.location.host + ":8080");
+    function connect() {
+      outputMsg("# Connecting..");
 
-    // Connection opened
-    socket.addEventListener('open', (event) => {
-      outputMsg("# Connected!");
-    });
+      // Create WebSocket connection.
+      const protocol = (location.protocol === 'https:' ? 'wss://' : "ws://");
+      const socket = new WebSocket(protocol + document.location.host + ":8080");
 
-    // Error
-    socket.addEventListener('error', (error) => {
-      outputMsg("# Failed! " + error);
-    });
+      // Connection opened
+      socket.addEventListener('open', (event) => {
+        outputMsg("# Connected!");
+      });
 
-    // Listen for messages
-    socket.addEventListener('message', (event) => {
-      outputMsg(event.data.replaceAll("\n", "<br>"));
-    });
+      socket.addEventListener('close', (event) => {
+        outputMsg("# Disconnected!");
+        setTimeout(connect, 3000);
+      });
+
+      // Error
+      socket.addEventListener('error', (error) => {
+        outputMsg("# Failed! " + error);
+        setTimeout(connect, 3000);
+      });
+
+      // Listen for messages
+      socket.addEventListener('message', (event) => {
+        outputMsg(event.data.replaceAll("\n", "<br>"));
+      });
+    }
+    connect();
 
   </script>
 </body>
