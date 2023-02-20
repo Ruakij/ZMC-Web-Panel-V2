@@ -16,10 +16,11 @@ class MyWebSocket implements MessageComponentInterface {
     }
 
     public function onOpen(ConnectionInterface $conn) {
+        echo "[{$conn->resourceId}] New connection!\n";
         // Authenticate the client
         if ($this->authenticateClient($conn)) {
             $this->clients->attach($conn);
-            echo "New connection! ({$conn->resourceId})\n";
+            echo "[{$conn->resourceId}] Authenticated!\n";
         } else {
             $conn->close();
         }
@@ -33,7 +34,7 @@ class MyWebSocket implements MessageComponentInterface {
 
     public function onClose(ConnectionInterface $conn) {
         $this->clients->detach($conn);
-        echo "Connection {$conn->resourceId} has disconnected\n";
+        echo "[{$conn->resourceId}] Disconnected!\n";
     }
 
     public function onError(ConnectionInterface $conn, \Exception $e) {
