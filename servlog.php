@@ -1,43 +1,56 @@
 <?php session_start(); /* Starts the session */
 
-if(!isset($_SESSION['UserData']['Username'])){
-        header("location:login.php");
-        exit;
+if (!isset($_SESSION['UserData']['Username'])) {
+  header("location:login.php");
+  exit;
 }
 ?>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
-<meta http-equiv="refresh" content="1000" >
-  <p style="color:white;"><script type="text/javascript" src="autoUpdate.js"></script> <script type="text/javascript">
-      function moveWin() {
-        window.scroll(0,1000000000); setTimeout('moveWin();',0);
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <p style="color:white; font-family: 'Roboto Mono', monospace;" id="pger">
+    # Connecting...
+  </p>
+
+  <script type="text/javascript">
+    const output = document.getElementById('pger');
+    function outputMsg(msg) {
+      if (msg[-1, 1] !== "<br>") {
+        msg += "<br>";
       }
-      
-      </script>
-      <body onLoad="moveWin();">
-<script>
-  
-setInterval(function(){
-  let xhr = new XMLHttpRequest();
+      output.textContent += msg;
 
-xhr.open('GET', 'log.php');
+      window.scroll(0, 1000000000);
+    }
 
-xhr.responseType = 'text';
+    // Create WebSocket connection.
+    const protocol = (location.protocol === 'https:' ? 'wss://' : "ws://");
+    const socket = new WebSocket(protocol + document.location.host + ":8080");
 
-xhr.send();
-xhr.onload = function() {
-  let responseObj = xhr.responseText;
-  document.getElementById("pger").innerHTML = responseObj;
-};
+    // Connection opened
+    socket.addEventListener('open', (event) => {
+      outputMsg("# Connected!");
+    });
 
-}, 100);
-</script>
-<?php // echo str_replace("\n","<br>", shell_exec("docker logs "."mc")); ?>
-</p>
+    // Error
+    socket.addEventListener('error', (error) => {
+      outputMsg("# Failed! " + error);
+    });
 
-<p style="color:white; font-family: 'Roboto Mono', monospace;" id="pger">
-Loading...
-</p>
+    // Listen for messages
+    socket.addEventListener('message', (event) => {
+      outputMsg(event.data.replace("\n", "<br>"));
+    });
+
+  </script>
+</body>
+
+</html>
