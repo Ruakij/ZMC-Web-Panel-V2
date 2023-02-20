@@ -3,6 +3,8 @@
     "type": "project",
     "license": "AGPL-3.0",
     "require": {
-        "cboden/ratchet": "^0.4.4"
+        "cboden/ratchet": "^0.4.4",
+        "react/child-process": "^0.6.5",
+        "react/stream": "^1.2"
     }
 }
