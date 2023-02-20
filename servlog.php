@@ -35,7 +35,7 @@ function refresh(){
     let responseObj = xhr.responseText;
     document.getElementById("pger").innerHTML = responseObj;
 
-    let nexTimeout = Math.max(timeDiff, 10*1000)
+    let nexTimeout = Math.min(timeDiff, 10*1000)
     setTimeout(refresh, nexTimeout);
   };
 };
