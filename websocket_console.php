@@ -32,7 +32,8 @@ class MyWebSocket implements MessageComponentInterface
             $conn->process->start();
 
             $conn->process->stdout->on('data', function ($chunk) use ($conn) {
-                $conn->send($chunk);
+                $chunkSanitized = htmlspecialchars($chunk);
+                $conn->send($chunkSanitized);
             });
 
             $conn->process->on('exit', function ($exitCode, $termSignal) use ($conn) {
