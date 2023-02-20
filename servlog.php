@@ -23,10 +23,10 @@ if (!isset($_SESSION['UserData']['Username'])) {
   <script type="text/javascript">
     const output = document.getElementById('pger');
     function outputMsg(msg) {
-      if (msg[-1, 1] !== "<br>") {
+      if (msg.substr(-4) !== "<br>") {
         msg += "<br>";
       }
-      output.textContent += msg;
+      output.innerHTML += msg;
 
       window.scroll(0, 1000000000);
     }
