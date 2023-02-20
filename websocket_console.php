@@ -35,7 +35,7 @@ class MyWebSocket implements MessageComponentInterface
                 $conn->send($chunk);
             });
 
-            $conn->process->on('exit', function($exitCode, $termSignal) use ($conn) {
+            $conn->process->on('exit', function ($exitCode, $termSignal) use ($conn) {
                 $conn->send("process exited with {$exitCode}");
                 $conn->close();
             });
@@ -45,7 +45,8 @@ class MyWebSocket implements MessageComponentInterface
         }
     }
 
-    public function onMessage(ConnectionInterface $from, $cmdRaw) {
+    public function onMessage(ConnectionInterface $from, $cmdRaw)
+    {
         $cmdSanitized = escapeshellarg($cmdRaw);
         // Execute a command and pass the output to the client
         shell_exec("docker exec mc mc-send-to-console {$cmdSanitized}");
@@ -122,7 +123,8 @@ $server = IoServer::factory(
             new MyWebSocket()
         )
     ),
-    8080
+    8080,
+    '[::]'
 );
 
 $server->run();
