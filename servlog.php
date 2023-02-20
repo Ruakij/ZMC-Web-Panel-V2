@@ -9,7 +9,6 @@ if(!isset($_SESSION['UserData']['Username'])){
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
-<meta http-equiv="refresh" content="1000" >
   <p style="color:white;"><script type="text/javascript" src="autoUpdate.js"></script> <script type="text/javascript">
       function moveWin() {
         window.scroll(0,1000000000); setTimeout('moveWin();',0);
