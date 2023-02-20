@@ -102,8 +102,13 @@ if(!isset($_SESSION['UserData']['Username'])){
                   const consoleIframeWin = document.getElementById("theconsoleitselflol").contentWindow;
 
                   cmdFormElm.addEventListener("submit", () => {
-                    // Send command
-                    consoleIframeWin.sendCommand(cmdElm.textContent);
+                    // Get cmd
+                    const cmd = cmdElm.value.trim();
+
+                    if (cmd !== "") {
+                      // Send command
+                      consoleIframeWin.sendCommand(cmdElm.value);
+                    }
 
                     // Stop propagation
                     return false;
