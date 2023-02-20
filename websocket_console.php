@@ -45,10 +45,11 @@ class MyWebSocket implements MessageComponentInterface
         }
     }
 
-    public function onMessage(ConnectionInterface $from, $msg) {
+    public function onMessage(ConnectionInterface $from, $cmdRaw) {
+        $cmdSanitized = escapeshellarg($cmdRaw);
         // Execute a command and pass the output to the client
-        $output = shell_exec($msg);
-        $from->send($output);
+        shell_exec("docker exec mc mc-send-to-console {$cmdSanitized}");
+        $from->send("> {$cmdSanitized}");
     }
 
     public function onClose(ConnectionInterface $conn)

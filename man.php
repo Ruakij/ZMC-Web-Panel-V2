@@ -8,11 +8,6 @@ if(!isset($_SESSION['UserData']['Username'])){
 
 
 <?php
-  function runcmd($dock, $cmd) {
-    shell_exec("docker exec ".$dock." mc-send-to-console ".$cmd);
-    echo 'Command executed (200)<br>';
-    echo 'Command: '.$cmd;
-  }
   function servstop($dock) {
     shell_exec("docker stop ".$dock);
     echo 'Command executed (200)<br>';
@@ -138,9 +133,6 @@ if(!isset($_SESSION['UserData']['Username'])){
 
   
 
-  if (isset($_GET["command"])) {
-    runcmd("mc", $_GET["command"]);
-  }
   if (isset($_GET["stop"])) {
     servstop("mc");
   }
