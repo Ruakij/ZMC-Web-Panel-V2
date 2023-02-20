@@ -1,0 +1,8 @@
+{
+    "name": "zribedev/zmc-web-panel-v2",
+    "type": "project",
+    "license": "AGPL-3.0",
+    "require": {
+        "cboden/ratchet": "^0.4.4"
+    }
+}
