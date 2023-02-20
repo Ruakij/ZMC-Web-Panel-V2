@@ -50,8 +50,8 @@ if (!isset($_SESSION['UserData']['Username'])) {
 
       // Error
       socket.addEventListener('error', (error) => {
-        outputMsg("# Failed! " + error);
-        setTimeout(connect, 3000);
+        outputMsg("# Failed! " + error.msg);
+        setTimeout(connect, 5000);
       });
 
       // Listen for messages
