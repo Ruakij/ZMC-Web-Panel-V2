@@ -77,27 +77,38 @@ if(!isset($_SESSION['UserData']['Username'])){
       </div>
     </aside>
     <! ----------------------------------------------------->
-    <main>
-      <h1 id="welcome">Welcome, Admin</h1>
-      <div class="insights">
-        <div class="sales">
-          <span class="material-symbols-rounded">terminal</span>
-          
-          <div class="middle">
-            <div class="left">
-              <br>
-              <iframe id="theconsoleitselflol" src="/servlog.php" title="LOG" width="800px" height="500px" style="border:1px solid black;"></iframe>
-              <br>
-              <iframe name="hid1" style="display:none;"></iframe>
-              <form action="man.php" method="get" target="hid1">
+      <main>
+        <h1 id="welcome">Welcome, Admin</h1>
+        <div class="insights">
+          <div class="sales">
+            <span class="material-symbols-rounded">terminal</span>
+
+            <div class="middle">
+              <div class="left">
+                <br>
+                <iframe id="theconsoleitselflol" src="/servlog.php" title="LOG" width="800px" height="500px"
+                  style="border:1px solid black;"></iframe>
+                <br>
+                <iframe name="hid1" style="display:none;"></iframe>
+
+                <form id="CmdForm">
                   <input type="text" placeholder="Command..." id="command" name="command"></input>
-                  <input type="hidden" name="ad_id" value="2">   
+                  <input type="hidden" name="ad_id" value="2">
                   <input type="submit" name="run" value="Run">
-                       
                 </form>
-              <div>
-                
-                <form action="man.php" method="get" target="hid1">
+                <script>
+                  const cmdFormElm = document.getElementById("CmdForm");
+                  const cmdElm = document.getElementById("command");
+                  const consoleIframeWin = document.getElementById("theconsoleitselflol").contentWindow;
+
+                  cmdFormElm.addEventListener("submit", () => {
+                    // Send command
+                    consoleIframeWin.sendCommand(cmdElm.textContent);
+
+                    // Stop propagation
+                    return false;
+                  });
+                </script>
                     <input type="submit" value="Start">
                     <input type="hidden" name="ad_id" value="2">        
                     <input type="hidden" name="start" value="2">            
